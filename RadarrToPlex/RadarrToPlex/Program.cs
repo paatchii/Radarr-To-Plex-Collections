@@ -437,7 +437,16 @@ namespace RadarrToPlex
                             foreach (XmlNode videoNode in videoNodes)
                             {
                                 currentMovie++;
-                                int remainder = currentMovie % percentIncrement;
+                                int remainder;
+                                if (percentIncrement != 0)
+                                {
+                                    remainder = currentMovie % percentIncrement;
+                                }
+                                else
+                                {
+                                    // Handle the case when percentIncrement is zero
+                                    remainder = 0;
+                                }
                                 bool isWholeNumber = remainder == 0;
                                 if (isWholeNumber)
                                 {
@@ -729,7 +738,16 @@ namespace RadarrToPlex
                     Log.Information($"Processing plex collection ({currentCollection}/{totalCollections}): {collectionName}");
 
                     // Update percentIncrease if a whole increment of movies has been processed
-                    int remainder = currentCollection % percentIncrement;
+                    int remainder;
+                    if (percentIncrement != 0)
+                    {
+                        remainder = currentCollection % percentIncrement;
+                    }
+                    else
+                    {
+                        // Handle the case when percentIncrement is zero
+                        remainder = 0;
+                    }
                     bool isWholeNumber = remainder == 0;
                     if (isWholeNumber)
                     {
